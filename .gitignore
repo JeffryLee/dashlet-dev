@@ -6,4 +6,7 @@
 *.pdf
 *.db
 *.out
-
+*.pcap
+*.png
+*.log
+*.csv
