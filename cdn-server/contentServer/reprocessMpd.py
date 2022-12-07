@@ -7,7 +7,6 @@ import os
 dataDir = "./dash/data/"
 fileList = os.listdir(dataDir)
 
-# tmp = 0
 etree.register_namespace("", "urn:mpeg:dash:schema:mpd:2011")
 
 # fileList = fileList[0:2]
@@ -85,20 +84,3 @@ for folderName in fileList:
     fd = open(curmpd, "wb")
     fd.write(outstr)
     fd.close()
-
-
-
-
-
-
-
-        #     print(bitrate)
-        #
-        # print("===========")
-
-
-        # print(root[1][i][0].attrib['bandwidth'])
-        #
-        # print(root[1][i][0])
-
-        # os.path.getsize("/path/isa_005.mp3")

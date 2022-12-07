@@ -1,15 +1,12 @@
+import csv
 import os
 import subprocess
 
 
-import csv
-
-import os
-from pathlib import Path
 
 
-metadatafolder = "/home/acer/Documents/reverse-tiktok/data"
-videofolder = "/home/acer/Documents/reverse-tiktok/video"
+metadatafolder = "/home/acer/Documents/ttstream/reverse-tiktok/data"
+videofolder = "/home/acer/Documents/ttstream/reverse-tiktok/video"
 outfolder = "./dash/data/"
 
 IDX_URI = 1
