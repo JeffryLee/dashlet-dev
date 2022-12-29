@@ -56,7 +56,7 @@ def json():
 
 @app.route('/svs')
 def svs():
-    return render_template('index.html')
+    return render_template('index-exp.html')
 
 #background process happening without any refreshing
 @app.route('/background_process_test')
@@ -109,4 +109,5 @@ def getNeighbour():
     # print(jsdata)
     ret["uidPre"] = getPre(jsdata)
     ret["uidNext"] = getNext(jsdata)
+    print(ret["uidNext"])
     return jsonify(ret)

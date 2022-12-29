@@ -12,16 +12,19 @@ var view = document.getElementById('example-video');
 //     videoContainer.appendChild(view);
 // }
 
+// 172.29.130.16
+// 172.29.114.202
+var cdnaddress = 'http://100.64.0.1:8080/dash/data/';
 
-var cdnaddress = 'http://172.29.130.16:8080/dash/data/';
-
+// var cdnaddress = 'http://127.0.0.1:8080/dash/data/';
 
 var thisVideo = '5904810145583287557';
-
+var requestvideo = '';
 
 var nextVideo = '';
 var preVideo = '';
 var swaptmp = '';
+
 
 
 $.getJSON('/getNeighbour', {
@@ -30,6 +33,7 @@ $.getJSON('/getNeighbour', {
     nextVideo = data.uidNext;
 });
 
+// get all the 
 
 // for (var i=0; i<7; i++) {
 
@@ -119,4 +123,11 @@ window.addEventListener("touchend",function(event){
     }
 
 });
+
+
+function toNextVideo() {
+
+    player.playNext();
+
+}
 
