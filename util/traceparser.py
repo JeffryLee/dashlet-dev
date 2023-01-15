@@ -65,7 +65,6 @@ class downloadtraceparser:
             spamreader = csv.reader(csvfile, delimiter=',', quotechar='|')
             
             for row in spamreader:
-                # print(row)
 
                 self.content_type_list.append(row[self.IDX_CONTENT_TYPE])
 
