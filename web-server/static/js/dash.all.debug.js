@@ -31715,7 +31715,7 @@ function SuperPlayer() {
 
     var context = this.context;
 
-    var queueLength = 8;
+    var queueLength = 5;
 
     var instance = undefined,
         players = undefined,

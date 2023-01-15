@@ -43,25 +43,19 @@ var intervalID = setInterval(
     function(){
         var url = cdnaddress + thisVideo + '/manifest.mpd';
         
-        var ret = 0;
         
-        if (requestvideo != nextVideo) {
-            // previous request has returned
-            ret = player.attachSource(url);
-        }
+        var ret = player.attachSource(url);
 
         console.log("attach source");
 
         if (ret == 0) {
 
-            requestvideo = nextVideo;
+            thisVideo = nextVideo;
         
             $.getJSON('/getNeighbour', {
-                vid: requestvideo}, function(data) {
+                vid: thisVideo}, function(data) {
                 preVideo = data.uidPre;
                 nextVideo = data.uidNext;
-
-                thisVideo = requestvideo
 
                 console.log("preVideo: "+ preVideo+"; nextVideo: "+nextVideo);
             });
