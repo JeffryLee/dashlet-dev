@@ -14,21 +14,25 @@ var view = document.getElementById('example-video');
 
 // 172.29.130.16
 // 172.29.114.202
-var cdnaddress = 'http://100.64.0.1:8080/dash/data/';
+// var cdnaddress = 'http://100.64.0.1:8080/dash/data/';
 
-// var cdnaddress = 'http://127.0.0.1:8080/dash/data/';
+var cdnaddress = 'http://127.0.0.1:8080/dash/data/';
 
-var thisVideo = '5904810145583287557';
+var thisVideo = 'startvideo';
 var requestvideo = '';
 
 var nextVideo = '';
 var preVideo = '';
 var swaptmp = '';
 
+const queryString = window.location.search;
+const urlParams = new URLSearchParams(queryString);
+const traceid = urlParams.get('traceid');
 
+console.log(traceid);
 
 $.getJSON('/getNeighbour', {
-    vid: thisVideo}, function(data) {
+    vid: thisVideo,  traceid: traceid}, function(data) {
     preVideo = data.uidPre;
     nextVideo = data.uidNext;
 });
@@ -61,7 +65,7 @@ var intervalID = setInterval(
             requestvideo = nextVideo;
         
             $.getJSON('/getNeighbour', {
-                vid: requestvideo}, function(data) {
+                vid: requestvideo, traceid: traceid}, function(data) {
                 preVideo = data.uidPre;
                 nextVideo = data.uidNext;
 
