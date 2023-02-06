@@ -137,8 +137,8 @@ def getNeighbour():
     traceid = request.args.get('traceid', type=str)
 
     if traceid != None:
-        ret["uidPre"] = getNextvidByTrace(traceid, jsdata)
-        ret["uidNext"] = getPrevidByTrace(traceid, jsdata)
+        ret["uidPre"] = getPrevidByTrace(traceid, jsdata)
+        ret["uidNext"] = getNextvidByTrace(traceid, jsdata)
         print(ret["uidNext"])
         return jsonify(ret)
 
