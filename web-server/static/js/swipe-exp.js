@@ -2,7 +2,14 @@ var player = dashjs.SuperPlayer().create();
 
 var view = document.getElementById('example-video');
 
-var cdnaddress = 'http://127.0.0.1:8080/dash/data/';
+// var serverip = "{{ serverip }}";
+
+console.log("serverip");
+console.log(typeof(serverip));
+console.log(serverip);
+console.log("serverip");
+
+var cdnaddress = 'http://'+serverip+':8080/dash/data/';
 
 var thisVideo = 'startvideo';
 var requestvideo = '';

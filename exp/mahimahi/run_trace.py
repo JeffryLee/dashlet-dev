@@ -3,9 +3,11 @@ import os
 import sys
 import signal
 import time
+import subprocess
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import Select
 
 from webdriver_manager.chrome import ChromeDriverManager
 
@@ -30,7 +32,20 @@ import traceparser
 def timeout_handler(signum, frame):
     raise Exception("Timeout")
 
+
+
+
 def main(args):
+    abr_server_script_path = this_folder_path + f"/../../abr-server/empc_server_dashlet_j.py"
+
+    probability_distribution_path = this_folder_path + f"/../../abr-server/probability/lamda2/"
+
+    cmd_abr_server = f"python3 {abr_server_script_path} --probabilitytraces {probability_distribution_path}"
+
+    print(cmd_abr_server)
+
+    process_abr_server = subprocess.Popen(cmd_abr_server.split())
+
     run_time= 2400
 
     # timeout signal
@@ -47,23 +62,37 @@ def main(args):
     watch_time = sparser.get_watch_time()
 
     s=Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=s)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--ignore-ssl-errors=yes')
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--allow-insecure-localhost')
+    # solve the cors issue
+    options.add_argument('--disable-web-security')
+    
+    driver = webdriver.Chrome(service=s, options=options)
     driver.maximize_window()
+    
     driver.get(f"http://{args.serverip}:5000/svs?traceid={args.expid}")
     time.sleep(5)
 
+    # skip the init video
+    driver.find_element(By.ID, 'nextbutton').click()
+    time.sleep(5)
 
     for i in range(len(watch_time)):
 
         driver.find_element(By.ID, 'nextbutton').click()
         print("next")
-        print(watch_time[i])# driver.get('http://100.64.0.1:5000/svs')
+        print(watch_time[i])
     
         time.sleep(watch_time[i])
    
     driver.save_screenshot('ss.png')
         
     driver.quit()
+
+    process_abr_server.terminate()
+
     # display.stop()
     
 

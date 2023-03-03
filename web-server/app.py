@@ -1,9 +1,9 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, current_app, request
 from flask_cors import CORS
 
 import time
 
-
+import argparse
 import os
 import sys
 from DbHandler import DbHandler
@@ -78,8 +78,7 @@ def svs():
     for i in range(1, len(uri_list)):
         pre_vid_dict[traceid][uri_list[i]] = uri_list[i-1]
 
-
-    return render_template('index-exp.html')
+    return render_template('index-exp.html', serverip=app.config['serverip'])
 
 #background process happening without any refreshing
 @app.route('/background_process_test')
@@ -146,3 +145,15 @@ def getNeighbour():
     ret["uidNext"] = getNextvid(jsdata)
     print(ret["uidNext"])
     return jsonify(ret)
+
+if __name__ == '__main__':
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--serverip', default="127.0.0.1")
+
+    args = parser.parse_args()
+
+
+    app.config['serverip'] = args.serverip
+
+    app.run(port=5000, debug=True, host="0.0.0.0")
