@@ -112,3 +112,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(args)
+
+
+# sudo /usr/local/nginx/sbin/nginx
+# sudo sysctl -w net.ipv4.ip_forward=1
+# mm-link ../../reverse-tiktok/traces/network.up ../../reverse-tiktok/traces/net-flat/trace-5.0.down --downlink-queue=droptail --downlink-queue-args="bytes=150000" --uplink-queue=infinite
